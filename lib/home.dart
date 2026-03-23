@@ -47,6 +47,8 @@ class HomeScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.white,
+        surfaceTintColor: Colors.transparent,
         toolbarHeight: screenHeight * 0.105,
         titleSpacing: 0,
         title: Column(
@@ -110,6 +112,7 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
       body: SingleChildScrollView(
+
         child: Column(
           children: [
             Container(
@@ -191,51 +194,48 @@ class HomeScreen extends StatelessWidget {
               itemCount: videos.length,
               itemBuilder: (context, index) {
                 final video = videos[index];
-                return Container(
-                  decoration: BoxDecoration(color: Colors.white),
-                  child: Column(
-                    children: [
-                      Image.asset('assets/images/${video['thumbnail']}.png'),
-                      SizedBox(height: 15),
-                      Row(
-                        children: [
-                          CircleAvatar(
-                            child: Image.asset(
-                              'assets/images/${video['channel_photo']}.jpg',
+                return InkWell( onTap: (){},
+                  child: Container(
+                    padding: EdgeInsets.only(bottom: 12),
+                    decoration: BoxDecoration(color: Colors.white),
+                    child: Column(
+                      children: [
+                        Image.asset('assets/images/${video['thumbnail']}.png'),
+                        SizedBox(height: 15),
+                        Row(
+                          children: [
+                            SizedBox(width: 12),
+                            CircleAvatar(
+                              radius: 20,
+                              backgroundImage:AssetImage('assets/images/${video['channel_photo']}.jpg'),
                             ),
-                          ),
-                          Column(
-                            children: [
-                              Row(
+                            SizedBox(width: 12,),
+                            Expanded(
+                              child: Column(
                                 children: [
-                                  SizedBox(width: 15),
-
-                                  SizedBox(width: 15),
-                                  Text(
-                                    '${video['title']}',
-                                    style: TextStyle(fontSize: 16),
+                                  Row(
+                                    children: [
+                                      Text('${video['title']}', style: TextStyle(fontSize: 16),),
+                  
+                                  ],
+                  
                                   ),
-                                  Spacer(),
-                                  IconButton(
-                                    onPressed: () {},
-                                    icon: Icon(Icons.more_vert),
-                                  ),
+                                  Row(
+                                    children: [
+                                      SizedBox(width:MediaQuery.of(context).size.width * 0.7,
+                                          child: Text('${video['channel']} · ${video['views']} views · ${video['since']} hours ago', style: TextStyle(fontSize: 13), textAlign: TextAlign.left, overflow: TextOverflow.visible,)),
+                  
+                                    ],
+                                  )
+                  
                                 ],
                               ),
-
-                              SizedBox(height: 15),
-                              Row(
-                                children: [
-                                  Text('${video['channel']}'),
-                                  Text('1.8k views'),
-                                  Text('12 hours ago'),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ],
+                            ),
+                            IconButton(onPressed: (){}, icon: Icon(Icons.more_vert))
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 );
               },
